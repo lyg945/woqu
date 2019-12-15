@@ -9,13 +9,8 @@ import javax.annotation.Resource;
 @SpringBootApplication
 public class WoquApplication {
 
-	@Resource
-	OAService oAService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(WoquApplication.class, args);
-
-//		oAService.pullOA();
 	}
 
 }

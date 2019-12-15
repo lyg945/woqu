@@ -4,5 +4,5 @@ public interface OAService {
 
     void pullOA();
 
-    void sendMsg(String msg);
+    void sendMsg(int i);
 }
