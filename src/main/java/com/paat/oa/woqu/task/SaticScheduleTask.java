@@ -39,7 +39,7 @@ public class SaticScheduleTask {
     //2019-12-16 10:50:00
     @Scheduled(cron = "0 0/10 10 * * ?")
     private void task2() {
-        oaService.sendMsg(1);
+        oaService.pullOA();
     }
 
     //2019-12-16 22:00:00
@@ -60,6 +60,6 @@ public class SaticScheduleTask {
     @Scheduled(cron = "0 0/10 22 * * ?")
 //    @Scheduled(cron = "5-10 * * * * ?")
     private void task4() {
-        oaService.sendMsg(2);
+        oaService.pullOA();
     }
 }
