@@ -17,48 +17,34 @@ public class SaticScheduleTask {
     @Resource
     OAService oaService;
 
-//    @Scheduled(cron = "5-10 * * * * ?")
+    //1分鐘一次
+//    @Scheduled(cron = "0 0/1 * * * ? ")
     private void task0() {
         oaService.pullOA();
     }
 
-    //2019-12-16 10:00:00
-    //2019-12-16 10:30:00
-    //2019-12-16 11:00:00
-    //2019-12-16 11:30:00
-    @Scheduled(cron = "0 0,30 10,11 * * ?")
+    //2019-12-16 9:50  9:55
+    @Scheduled(cron = "0 50,55 9 * * ? ")
     private void task1() {
         oaService.pullOA();
     }
 
-    //2019-12-16 10:00:00
-    //2019-12-16 10:10:00
-    //2019-12-16 10:20:00
-    //2019-12-16 10:30:00
-    //2019-12-16 10:40:00
-    //2019-12-16 10:50:00
-    @Scheduled(cron = "0 0/10 10 * * ?")
+    //2019-12-16 10:00 10:30
+    @Scheduled(cron = "0 0,30 10 * * ? ")
     private void task2() {
         oaService.pullOA();
     }
 
-    //2019-12-16 22:00:00
-    //2019-12-16 22:30:00
-    //2019-12-16 23:00:00
-    //2019-12-16 23:30:00
-    @Scheduled(cron = "0 0,30 22,23 * * ?")
+
+    //2019-12-16 22:00 22:30
+    @Scheduled(cron = "0 0,3 22 * * ? ")
     private void task3() {
         oaService.pullOA();
     }
 
-    //2019-12-16 22:00:00
-    //2019-12-16 22:10:00
-    //2019-12-16 22:20:00
-    //2019-12-16 22:30:00
-    //2019-12-16 22:40:00
-    //2019-12-16 22:50:00
-    @Scheduled(cron = "0 0/10 22 * * ?")
-//    @Scheduled(cron = "5-10 * * * * ?")
+
+    //2019-12-16 23:00 23:30
+    @Scheduled(cron = "0 0,30 23 * * ? ")
     private void task4() {
         oaService.pullOA();
     }
