@@ -65,7 +65,7 @@ public class OAServiceImpl implements OAService {
         for (Object day : days) {
             JSONObject obj = (JSONObject) day;
             if(DateUtil.format(new Date(), "yyyy-MM-dd").equals(obj.getStr("AFormatDay"))
-//                    && "workday".equals(obj.getStr("dayType"))
+                    && "workday".equals(obj.getStr("dayType"))
             ){
                 if(StringUtils.isEmpty(obj.getStr("workStart"))){
                     send(str,obj.getStr("AFormatDay"),"早上");
