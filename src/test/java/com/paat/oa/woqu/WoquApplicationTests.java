@@ -23,7 +23,7 @@ public class WoquApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		oaService.pullOA();
+		oaService.pullOA(1);
 	}
 
 	@Test

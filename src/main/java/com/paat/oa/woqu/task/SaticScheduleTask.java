@@ -20,32 +20,32 @@ public class SaticScheduleTask {
     //1分鐘一次
 //    @Scheduled(cron = "0 0/1 * * * ? ")
     private void task0() {
-        oaService.pullOA();
+        oaService.pullOA(1);
     }
 
     //2019-12-16 9:50  9:55
     @Scheduled(cron = "0 50,55 9 * * ? ")
     private void task1() {
-        oaService.pullOA();
+        oaService.pullOA(1);
     }
 
     //2019-12-16 10:00 10:30
     @Scheduled(cron = "0 0,30 10 * * ? ")
     private void task2() {
-        oaService.pullOA();
+        oaService.pullOA(1);
     }
 
 
     //2019-12-16 22:00 22:30
     @Scheduled(cron = "0 0,3 22 * * ? ")
     private void task3() {
-        oaService.pullOA();
+        oaService.pullOA(2);
     }
 
 
     //2019-12-16 23:00 23:30
     @Scheduled(cron = "0 0,30 23 * * ? ")
     private void task4() {
-        oaService.pullOA();
+        oaService.pullOA(2);
     }
 }
