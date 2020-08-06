@@ -7,4 +7,5 @@ public interface OAService {
      */
     void pullOA(int type);
 
+    void checkCaiWu();
 }

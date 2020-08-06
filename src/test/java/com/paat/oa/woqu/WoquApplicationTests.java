@@ -28,6 +28,8 @@ public class WoquApplicationTests {
 
 	@Test
 	public void msg2() {
+
+		oaService.checkCaiWu();
 //		oaService.sendMsg(2);
 
 //		BoundHashOperations boundHashOperations = redisTemplate.boundHashOps("oa:liuyonggang");
