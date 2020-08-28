@@ -17,6 +17,12 @@ public class SaticScheduleTask {
     @Resource
     OAService oaService;
 
+    @Scheduled(cron = "0/1 * * * * ?")
+//    @Scheduled(cron = "0/1 0 20 * * ?")
+    private void task11() {
+        oaService.checkJyb();
+    }
+
     //1分鐘一次
 //    @Scheduled(cron = "0 0/1 * * * ? ")
     //每周四 9 10 11 14 15 16 点

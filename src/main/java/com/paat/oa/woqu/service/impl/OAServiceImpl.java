@@ -1,28 +1,23 @@
 package com.paat.oa.woqu.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import com.paat.oa.woqu.service.OAService;
 import com.paat.oa.woqu.UserAccountEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.net.HttpCookie;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.*;
 
 @Service
 @Slf4j
@@ -75,6 +70,41 @@ public class OAServiceImpl implements OAService {
         if(!checkResult("http://180.167.151.210:12364/")){
             send("财务电子发票-http://180.167.151.210:12364/  拒绝访问");
         }
+    }
+
+    //指定必须有6个运动员到达才行
+    private static CyclicBarrier barrier = new CyclicBarrier(10, () -> {
+        System.out.println("所有运动员入场，裁判员一声令下！！！！！");
+    });
+
+    @Override
+    public void checkJyb() {
+        System.out.println("运动员准备进场，全场欢呼............");
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        for (int i = 0; i < 10; i++) {
+            service.submit(() -> {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " 运动员，进场");
+                    barrier.await();
+                    System.out.println(getJyb());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
+    private int getJyb() {
+        int status = HttpRequest.get("https://www.jieyuanbao.com").execute().getStatus();
+        System.out.println(status);
+        log.info("_________jyb_________{}",status);
+        if(status != 200){
+            send("捷园宝网站挂了，请求返回："+status);
+//            log.info("_________jyb_________{}",status);
+        }
+        return status;
     }
 
 

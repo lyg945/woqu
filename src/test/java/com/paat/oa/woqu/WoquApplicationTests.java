@@ -2,6 +2,9 @@ package com.paat.oa.woqu;
 
 
 import com.paat.oa.woqu.service.OAService;
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +18,10 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = WoquApplication.class)
 public class WoquApplicationTests {
 
+	//引入 ContiPerf 进行性能测试
+//	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
+
 	@Resource
 	OAService oaService;
 
@@ -24,6 +31,13 @@ public class WoquApplicationTests {
 	@Test
 	public void contextLoads() {
 		oaService.pullOA(1);
+	}
+
+	//10个线程 执行100次
+	@Test
+//	@PerfTest(invocations = 1000,threads = 10)
+	public void checkJyb() {
+		oaService.checkJyb();
 	}
 
 	@Test
