@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 public class WoquApplicationTests {
 
 	//引入 ContiPerf 进行性能测试
-//	@Rule
+	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
 
 	@Resource
@@ -35,7 +35,7 @@ public class WoquApplicationTests {
 
 	//10个线程 执行100次
 	@Test
-//	@PerfTest(invocations = 1000,threads = 10)
+	@PerfTest(invocations = 1000,threads = 10)
 	public void checkJyb() {
 		oaService.checkJyb();
 	}

@@ -79,30 +79,36 @@ public class OAServiceImpl implements OAService {
 
     @Override
     public void checkJyb() {
-        System.out.println("运动员准备进场，全场欢呼............");
-        ExecutorService service = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 10; i++) {
-            service.submit(() -> {
-                try {
-                    System.out.println(Thread.currentThread().getName() + " 运动员，进场");
-                    barrier.await();
-                    System.out.println(getJyb());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
+//        System.out.println("运动员准备进场，全场欢呼............");
+//        ExecutorService service = Executors.newFixedThreadPool(10);
+//        for (int i = 0; i < 10; i++) {
+//            service.submit(() -> {
+//                try {
+//                    System.out.println(Thread.currentThread().getName() + " 运动员，进场");
+//                    barrier.await();
+//                    System.out.println(getJyb());
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (BrokenBarrierException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//        }
+        getJyb();
     }
 
     private int getJyb() {
-        int status = HttpRequest.get("https://www.jieyuanbao.com").execute().getStatus();
-        System.out.println(status);
-        log.info("_________jyb_________{}",status);
+        String str ="https://www.jieyuanbao.com";
+        str ="https://ygy.paat.com";
+        str ="https://www.paat.com";
+        str ="http://www.jieshui8.com";
+        str ="https://www.zhaoshang88.net";
+        int status = HttpRequest.get(str).execute().getStatus();
+//        System.out.println(status);
+//        log.info("_________jyb_________{}",status);
         if(status != 200){
             send("捷园宝网站挂了，请求返回："+status);
-//            log.info("_________jyb_________{}",status);
+            log.info("_________jyb_________{}",status);
         }
         return status;
     }
