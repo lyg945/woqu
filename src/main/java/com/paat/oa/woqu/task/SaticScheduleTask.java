@@ -17,7 +17,7 @@ public class SaticScheduleTask {
     @Resource
     OAService oaService;
 
-    @Scheduled(cron = "0/1 * * * * ?")
+//    @Scheduled(cron = "0/1 * * * * ?")
 //    @Scheduled(cron = "0/1 0 20 * * ?")
     private void task11() {
         oaService.checkJyb();
@@ -26,16 +26,21 @@ public class SaticScheduleTask {
     //1分鐘一次
 //    @Scheduled(cron = "0 0/1 * * * ? ")
     //每周四 9 10 11 14 15 16 点
-    @Scheduled(cron = "0 0 9,10,11,14,15,16,17 ? 1-12 5")
+//    @Scheduled(cron = "0 0 9,10,11,14,15,16,17 ? 1-12 5")
     private void task() {
         oaService.checkCaiWu();
     }
 
     //1分鐘一次
-//    @Scheduled(cron = "0 0/1 * * * ? ")
+    @Scheduled(cron = "0 0/1 * * * ? ")
     private void task0() {
-        oaService.pullOA(1);
+        oaService.pullOA(2);
     }
+
+
+
+
+
 
     //2019-12-16 9:50  9:55
     @Scheduled(cron = "0 50,55 9 * * ? ")
@@ -50,7 +55,7 @@ public class SaticScheduleTask {
     }
 
 
-    //2019-12-16 22:00 22:30
+    //2019-12-16 22:00 22:03
     @Scheduled(cron = "0 0,3 22 * * ? ")
     private void task3() {
         oaService.pullOA(2);

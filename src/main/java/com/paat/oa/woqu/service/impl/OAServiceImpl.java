@@ -116,18 +116,20 @@ public class OAServiceImpl implements OAService {
 
     public void sendMsg(int type, String str, String message){
         log.info("{} ,{}, - 开始检查-打卡记录:{}",DateUtil.now(),str,message);
-        JSONArray days = JSONUtil.parseObj(message).getJSONObject("data").
-                getJSONObject("attendance").getJSONArray("days");
-        for (Object day : days) {
-            JSONObject obj = (JSONObject) day;
-            if(DateUtil.format(new Date(), "yyyy-MM-dd").equals(obj.getStr("AFormatDay"))
-                    && "workday".equals(obj.getStr("dayType"))
-            ){
-                if(StringUtils.isEmpty(obj.getStr("workStart")) && type == 1){
-                    send(str,obj.getStr("AFormatDay"),"早上");
-                }
-                if(StringUtils.isEmpty(obj.getStr("workEnd"))  && type == 2){
-                    send(str,obj.getStr("AFormatDay"),"晚上");
+        if(!StringUtils.isEmpty(message)){
+            JSONArray days = JSONUtil.parseObj(message).getJSONObject("data").
+                    getJSONObject("attendance").getJSONArray("days");
+            for (Object day : days) {
+                JSONObject obj = (JSONObject) day;
+                if(DateUtil.format(new Date(), "yyyy-MM-dd").equals(obj.getStr("AFormatDay"))
+                        && "workday".equals(obj.getStr("dayType"))
+                ){
+                    if(StringUtils.isEmpty(obj.getStr("workStart")) && type == 1){
+                        send(str,obj.getStr("AFormatDay"),"早上");
+                    }
+                    if(StringUtils.isEmpty(obj.getStr("workEnd"))  && type == 2){
+                        send(str,obj.getStr("AFormatDay"),"晚上");
+                    }
                 }
             }
         }
