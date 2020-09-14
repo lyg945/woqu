@@ -32,7 +32,7 @@ public class SaticScheduleTask {
     }
 
     //1分鐘一次
-    @Scheduled(cron = "0 0/1 * * * ? ")
+//    @Scheduled(cron = "0 0/1 * * * ? ")
     private void task0() {
         oaService.pullOA(2);
     }
@@ -42,6 +42,7 @@ public class SaticScheduleTask {
 
 
 
+    //部署服务器名称：stack@lo-d-dubbo
     //2019-12-16 9:50  9:55
     @Scheduled(cron = "0 50,55 9 * * ? ")
     private void task1() {
@@ -55,16 +56,30 @@ public class SaticScheduleTask {
     }
 
 
+    //2019-12-16 18:10
+    @Scheduled(cron = "0 10 18 * * ? ")
+    private void task3() {
+        oaService.pullOA(2);
+    }
+
+    //2019-12-16 22:00 22:03
+    @Scheduled(cron = "0 31,35 20 * * ? ")
+    private void task4() {
+        oaService.pullOA(2);
+    }
+
+
     //2019-12-16 22:00 22:03
     @Scheduled(cron = "0 0,3 22 * * ? ")
-    private void task3() {
+    private void task5() {
         oaService.pullOA(2);
     }
 
 
     //2019-12-16 23:00 23:30
     @Scheduled(cron = "0 0,30 23 * * ? ")
-    private void task4() {
+    private void task6() {
         oaService.pullOA(2);
     }
+
 }
