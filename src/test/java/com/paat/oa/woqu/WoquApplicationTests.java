@@ -1,7 +1,12 @@
 package com.paat.oa.woqu;
 
 
+import cn.binarywang.tools.generator.ChineseMobileNumberGenerator;
+import cn.binarywang.tools.generator.ChineseNameGenerator;
+import cn.binarywang.tools.generator.EmailAddressGenerator;
+import cn.hutool.core.map.MapUtil;
 import com.paat.oa.woqu.service.OAService;
+import com.paat.oa.woqu.service.YgyService;
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Rule;
@@ -13,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WoquApplication.class)
@@ -27,6 +33,9 @@ public class WoquApplicationTests {
 
 	@Resource
 	RedisTemplate redisTemplate;
+
+	@Resource
+	YgyService ygyService;
 
 	@Test
 	public void contextLoads() {
@@ -52,6 +61,29 @@ public class WoquApplicationTests {
 //		System.out.println(boundHashOperations.getKey());
 //		System.out.println(boundHashOperations.get(boundHashOperations.getKey()));
 //		System.out.println(boundHashOperations.);
+
+	}
+
+	@Test
+	@PerfTest(invocations = 1000,threads = 10)
+	public void check(){
+		String appId ="b3a940dd294b46a1b433642d18299634";
+		String appSecret ="7bd9f5150059476493141753260bb579754";
+
+		//新增创客
+		Map map = MapUtil.newHashMap();
+		map.put("mobile", ChineseMobileNumberGenerator.getInstance().generate());
+		map.put("realName", ChineseNameGenerator.getInstance().generate());
+		map.put("email", EmailAddressGenerator.getInstance().generate());
+		map.put("companyId",1305781645000966144L);
+
+		String signature = ygyService.changeMap(appId,appSecret,map);
+		System.out.println(signature);
+
+		//新增创客
+		ygyService.saveEmployed(signature,map);
+
+
 
 	}
 

@@ -103,8 +103,11 @@ public class OAServiceImpl implements OAService {
         str ="https://www.paat.com";
         str ="http://www.jieshui8.com";
         str ="https://www.zhaoshang88.net";
+        str ="https://www.jieyuanbao.com";
+        str ="https://www.jieyuanbao.vip";
+
         int status = HttpRequest.get(str).execute().getStatus();
-//        System.out.println(status);
+        System.out.println(status);
 //        log.info("_________jyb_________{}",status);
         if(status != 200){
             send("捷园宝网站挂了，请求返回："+status);
@@ -156,7 +159,7 @@ public class OAServiceImpl implements OAService {
     private void send(String content){
         JSONObject json = JSONUtil.parseObj("{\"msgtype\":\"markdown\"," +
                 "\"markdown\":{\"content\":\""+content+"\"}}");
-        HttpRequest.post("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6f8fee88-0281-4da8-b1be-d120d296d606")
+        HttpRequest.post("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0271dc3a-2286-4e2c-854f-9e32b404c2d1")
                 .body(json.toString())
                 .timeout(20000)//超时，毫秒
                 .execute().body();
