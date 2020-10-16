@@ -39,7 +39,7 @@ public class WoquApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		oaService.pullOA(1);
+		oaService.pullOA(2);
 	}
 
 	//10个线程 执行100次

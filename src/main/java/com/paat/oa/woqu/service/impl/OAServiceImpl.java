@@ -159,7 +159,7 @@ public class OAServiceImpl implements OAService {
     private void send(String content){
         JSONObject json = JSONUtil.parseObj("{\"msgtype\":\"markdown\"," +
                 "\"markdown\":{\"content\":\""+content+"\"}}");
-        HttpRequest.post("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0271dc3a-2286-4e2c-854f-9e32b404c2d1")
+        HttpRequest.post("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6f8fee88-0281-4da8-b1be-d120d296d606")
                 .body(json.toString())
                 .timeout(20000)//超时，毫秒
                 .execute().body();

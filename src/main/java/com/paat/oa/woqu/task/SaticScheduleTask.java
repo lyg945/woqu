@@ -26,7 +26,7 @@ public class SaticScheduleTask {
     //1分鐘一次
 //    @Scheduled(cron = "0 0/1 * * * ? ")
     //每周四 9 10 11 14 15 16 点
-//    @Scheduled(cron = "0 0 9,10,11,14,15,16,17 ? 1-12 5")
+    @Scheduled(cron = "0 0 9,14 ? 1-12 5 ")
     private void task() {
         oaService.checkCaiWu();
     }
