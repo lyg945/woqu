@@ -20,7 +20,7 @@ public class SaticScheduleTask {
         oaService.checkCaiWu();
     }
 
-    @Scheduled(cron = "* 4 * * *")
+//    @Scheduled(cron = "* 4 * * *")
     private void mail(){
         oaService.pullMall();
     }
