@@ -31,7 +31,7 @@ public class SaticScheduleTask {
 
     //2021-07-10 09:50:00
     //2021-07-10 09:55:00
-    @Scheduled(cron = "0 50,55 9 * * ? *")
+    @Scheduled(cron = "0 50,55 9 * * ? ")
     private void task1() {
         oaService.pullOA(1);
     }
@@ -39,7 +39,7 @@ public class SaticScheduleTask {
     //2021-07-10 10:00:00
     //2021-07-10 10:30:00
     //2021-07-10 10:50:00
-    @Scheduled(cron = "0 0,30,50 10 * * ? *")
+    @Scheduled(cron = "0 0,30,50 10 * * ? ")
     private void task2() {
         oaService.pullOA(1);
     }
@@ -47,7 +47,7 @@ public class SaticScheduleTask {
     //2021-07-09 18:00:00
     //2021-07-09 18:30:00
     //2021-07-09 18:50:00
-    @Scheduled(cron = "0 0,30,50 18 * * ? *")
+    @Scheduled(cron = "0 0,30,50 18 * * ? ")
     private void task3() {
         oaService.pullOA(2);
     }
@@ -55,7 +55,7 @@ public class SaticScheduleTask {
     //2021-07-10 20:00:00
     //2021-07-10 20:33:00
     //2021-07-10 20:40:00
-    @Scheduled(cron = "0 0,33,40 20 * * ? *")
+    @Scheduled(cron = "0 0,33,40 20 * * ? ")
     private void task4() {
         oaService.pullOA(2);
     }
@@ -63,7 +63,7 @@ public class SaticScheduleTask {
     //2021-07-09 22:00:00
     //2021-07-09 22:05:00
     //2021-07-09 22:30:00
-    @Scheduled(cron = "0 0,5,30 22 * * ? *")
+    @Scheduled(cron = "0 0,5,30 22 * * ? ")
     private void task5() {
         oaService.pullOA(2);
     }
