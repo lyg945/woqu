@@ -10,4 +10,6 @@ public interface OAService {
     void checkCaiWu();
 
     void checkJyb();
+
+    void pullMall();
 }
