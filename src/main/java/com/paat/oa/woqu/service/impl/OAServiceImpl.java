@@ -45,7 +45,7 @@ public class OAServiceImpl implements OAService {
                     .timeout(20000)//超时，毫秒
                     .execute().body();
 
-            sendMsg(type,array[1],result);
+            sendMsg(type,array[0],array[1],result);
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
@@ -142,7 +142,7 @@ public class OAServiceImpl implements OAService {
     }
 
 
-    public void sendMsg(int type, String studentName, String KaoQinResult){
+    public void sendMsg(int type, String userId,String studentName, String KaoQinResult){
         log.info("{} ,{}, - 开始检查-打卡记录:{}",DateUtil.now(),studentName,KaoQinResult);
         if(!StringUtils.isEmpty(KaoQinResult)){
             JSONArray days = JSONUtil.parseObj(KaoQinResult).getJSONObject("data").getJSONObject("attendance").getJSONArray("days");
@@ -166,11 +166,11 @@ public class OAServiceImpl implements OAService {
                     }else if(type == 2 && StringUtils.isEmpty(end)){
                         msg = studentName+"-"+obj.getStr("AFormatDay")+"晚上-漏打卡";
                     }else if(type == 2 && Long.valueOf(end).longValue() <= endTime){
-                        msg = studentName+"-18点30以后打卡："+timeStamp2Date(Long.valueOf(end));
+                        msg = studentName+"-18点30前打卡："+timeStamp2Date(Long.valueOf(end));
                     }
 
                     if(!StringUtils.isEmpty(msg)){
-                        send(msg);
+                        send(msg,userId);
                     }
                 }
             }
@@ -187,9 +187,18 @@ public class OAServiceImpl implements OAService {
         return flag == 200;
     }
 
-
+    private void send(String content,String userId){
+        JSONObject json = JSONUtil.parseObj("{\"msgtype\":\"text\"," +
+                "\"text\":{\"mentioned_list\":[\""+userId+"\"],\"content\":\""+content+"\"}}");
+        HttpRequest.post(
+//                "https://oapi.dingtalk.com/robot/send?access_token=20135a9b5e01427146ac92d25374a888f5060e28ae90ef9ed055d460bf95e806"
+                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=1e8097a0-f042-4bc5-a532-7cfa47350f0d"
+        )
+                .body(json.toString())
+                .timeout(20000)//超时，毫秒
+                .execute().body();
+    }
     private void send(String content){
-        System.out.println(content);
         JSONObject json = JSONUtil.parseObj("{\"msgtype\":\"text\"," +
                 "\"text\":{\"content\":\""+content+"\"}}");
         HttpRequest.post(
